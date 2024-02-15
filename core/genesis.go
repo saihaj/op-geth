@@ -371,6 +371,7 @@ func SetupGenesisBlockWithOverride(db ethdb.Database, triedb *trie.Database, gen
 		if hash != stored {
 			return genesis.Config, hash, &GenesisMismatchError{stored, hash}
 		}
+		log.Info("committing genesis because header.Root is not empty & the triedb does not contain the root", "header", header.Hash(), "root", header.Root)
 		block, err := genesis.Commit(db, triedb)
 		if err != nil {
 			return genesis.Config, hash, err
