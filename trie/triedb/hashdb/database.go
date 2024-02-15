@@ -543,7 +543,9 @@ func (c *cleaner) Delete(key []byte) error {
 // Initialized returns an indicator if state data is already initialized
 // in hash-based scheme by checking the presence of genesis state.
 func (db *Database) Initialized(genesisRoot common.Hash) bool {
-	return rawdb.HasLegacyTrieNode(db.diskdb, genesisRoot)
+	b := rawdb.HasLegacyTrieNode(db.diskdb, genesisRoot)
+	fmt.Println("checking hash db initialized", "genesisRoot", genesisRoot, "initialized", b)
+	return b
 }
 
 // Update inserts the dirty nodes in provided nodeset into database and link the
